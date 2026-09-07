@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -222,6 +221,65 @@ input:focus {
   box-shadow: 0 5px 12px rgba(190,120,210,0.25);
 }
 
+.save-btn:active {
+  transform: scale(0.98);
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  background: #eee3fa;
+  color: #76558d;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.back-btn:hover {
+  background: #e3d1f2;
+}
+
+/* BACKUP */
+
+.backup-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.backup-btn {
+  width: 100%;
+  padding: 13px 8px;
+  border: none;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.export-btn {
+  background: #e1f4ff;
+  color: #4385a8;
+}
+
+.import-btn {
+  background: #f4e4ff;
+  color: #8759a3;
+}
+
+.backup-note {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin: 12px 0 0;
+  line-height: 1.5;
+}
+
 /* HISTORY */
 
 .item {
@@ -230,6 +288,7 @@ input:focus {
   align-items: center;
   padding: 14px 0;
   border-bottom: 1px solid #f0eaf3;
+  gap: 8px;
 }
 
 .item:last-child {
@@ -240,6 +299,7 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .icon {
@@ -250,11 +310,13 @@ input:focus {
   display: grid;
   place-items: center;
   font-size: 20px;
+  flex-shrink: 0;
 }
 
 .item-name {
   font-weight: bold;
   font-size: 14px;
+  word-break: break-word;
 }
 
 .item-date {
@@ -266,11 +328,13 @@ input:focus {
 .income-text {
   color: #3d9b62;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .expense-text {
   color: #d45676;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .delete-btn {
@@ -392,8 +456,6 @@ input:focus {
     </div>
 
 
-    <!-- TOTAL MONEY -->
-
     <div class="total-box">
 
       💰 จำนวนเงินทั้งหมด
@@ -403,6 +465,15 @@ input:focus {
       </b>
 
     </div>
+
+    <button
+      id="backCurrentBtn"
+      class="back-btn"
+      onclick="goToCurrentWeek()"
+      style="display:none;"
+    >
+      🏠 กลับมาสัปดาห์นี้
+    </button>
 
   </div>
 
@@ -451,6 +522,7 @@ input:focus {
       type="number"
       id="weeklyMoney"
       placeholder="เช่น 500"
+      min="0"
     >
 
     <button
@@ -526,6 +598,8 @@ input:focus {
       type="number"
       id="amount"
       placeholder="เช่น 40"
+      min="0"
+      step="0.01"
     >
 
 
@@ -543,7 +617,7 @@ input:focus {
 
   <div class="card">
 
-    <h3>
+    <h3 id="transactionTitle">
       📋 รายการของสัปดาห์นี้
     </h3>
 
@@ -564,6 +638,48 @@ input:focus {
       id="weekHistory"
       class="week-history"
     ></div>
+
+  </div>
+
+
+  <!-- BACKUP -->
+
+  <div class="card">
+
+    <h3>
+      🔐 สำรองข้อมูล
+    </h3>
+
+    <div class="backup-box">
+
+      <button
+        class="backup-btn export-btn"
+        onclick="exportData()"
+      >
+        💾 สำรองข้อมูล
+      </button>
+
+      <button
+        class="backup-btn import-btn"
+        onclick="document.getElementById('importFile').click()"
+      >
+        📂 นำเข้าข้อมูล
+      </button>
+
+    </div>
+
+    <input
+      type="file"
+      id="importFile"
+      accept=".json,application/json"
+      style="display:none;"
+      onchange="importData(event)"
+    >
+
+    <div class="backup-note">
+      💡 แนะนำให้สำรองข้อมูลเก็บไว้เป็นระยะ<br>
+      เพื่อป้องกันข้อมูลหายและสามารถย้ายเครื่องได้
+    </div>
 
   </div>
 
@@ -751,7 +867,10 @@ function saveWeeklyMoney() {
     );
 
 
-  if (money < 0) {
+  if (
+    isNaN(money) ||
+    money < 0
+  ) {
 
     alert(
       "กรุณากรอกจำนวนเงินให้ถูกต้อง"
@@ -808,6 +927,7 @@ function addTransaction() {
   if (
     !date ||
     !name ||
+    isNaN(amount) ||
     amount <= 0
   ) {
 
@@ -868,6 +988,17 @@ function addTransaction() {
 
 function deleteTransaction(id) {
 
+  if (
+    !confirm(
+      "ต้องการลบรายการนี้ใช่ไหม?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
   allData[currentWeekKey]
     .transactions =
       allData[currentWeekKey]
@@ -885,7 +1016,55 @@ function deleteTransaction(id) {
 
 
 /* =================================
-   แสดงข้อมูลสัปดาห์ปัจจุบัน
+   คำนวณข้อมูลสัปดาห์
+================================= */
+
+function calculateWeek(week) {
+
+  let income =
+    Number(week.weeklyMoney) || 0;
+
+  let expense = 0;
+
+
+  week.transactions.forEach(item => {
+
+    const amount =
+      Number(item.amount) || 0;
+
+
+    if (
+      item.type === "income"
+    ) {
+
+      income += amount;
+
+    } else {
+
+      expense += amount;
+
+    }
+
+  });
+
+
+  return {
+
+    income: income,
+
+    expense: expense,
+
+    totalMoney: income,
+
+    balance: income - expense
+
+  };
+
+}
+
+
+/* =================================
+   แสดงข้อมูลสัปดาห์
 ================================= */
 
 function render() {
@@ -894,37 +1073,8 @@ function render() {
     allData[currentWeekKey];
 
 
-  let income =
-    week.weeklyMoney;
-
-
-  let expense = 0;
-
-
-  week.transactions
-    .forEach(item => {
-
-      if (
-        item.type === "income"
-      ) {
-
-        income += item.amount;
-
-      } else {
-
-        expense += item.amount;
-
-      }
-
-    });
-
-
-  const totalMoney =
-    income;
-
-
-  const balance =
-    income - expense;
+  const result =
+    calculateWeek(week);
 
 
   document.getElementById(
@@ -939,34 +1089,68 @@ function render() {
     "totalMoney"
   ).innerText =
     "฿" +
-    totalMoney.toLocaleString();
+    result.totalMoney.toLocaleString();
 
 
   document.getElementById(
     "income"
   ).innerText =
     "฿" +
-    income.toLocaleString();
+    result.income.toLocaleString();
 
 
   document.getElementById(
     "expense"
   ).innerText =
     "฿" +
-    expense.toLocaleString();
+    result.expense.toLocaleString();
 
 
   document.getElementById(
     "balance"
   ).innerText =
     "฿" +
-    balance.toLocaleString();
+    result.balance.toLocaleString();
 
 
   document.getElementById(
     "weeklyMoney"
   ).value =
     week.weeklyMoney || "";
+
+
+  const realWeek =
+    getWeekKey();
+
+
+  const backButton =
+    document.getElementById(
+      "backCurrentBtn"
+    );
+
+
+  if (
+    currentWeekKey === realWeek
+  ) {
+
+    backButton.style.display =
+      "none";
+
+  } else {
+
+    backButton.style.display =
+      "block";
+
+  }
+
+
+  document.getElementById(
+    "transactionTitle"
+  ).innerText =
+    currentWeekKey === realWeek
+    ? "📋 รายการของสัปดาห์นี้"
+    : "📋 รายการของ" +
+      getWeekText(currentWeekKey);
 
 
   renderTransactions();
@@ -1080,7 +1264,9 @@ function renderTransactions() {
                 : "-"
               }
 
-              ฿${item.amount.toLocaleString()}
+              ฿${Number(
+                item.amount
+              ).toLocaleString()}
 
             </span>
 
@@ -1130,7 +1316,9 @@ function renderWeekHistory() {
       .reverse();
 
 
-  if (keys.length === 0) {
+  if (
+    keys.length === 0
+  ) {
 
     container.innerHTML =
       `<div class="empty">
@@ -1149,33 +1337,8 @@ function renderWeekHistory() {
         allData[key];
 
 
-      let income =
-        week.weeklyMoney;
-
-
-      let expense = 0;
-
-
-      week.transactions
-        .forEach(item => {
-
-          if (
-            item.type === "income"
-          ) {
-
-            income += item.amount;
-
-          } else {
-
-            expense += item.amount;
-
-          }
-
-        });
-
-
-      const balance =
-        income - expense;
+      const result =
+        calculateWeek(week);
 
 
       const isCurrent =
@@ -1213,7 +1376,7 @@ function renderWeekHistory() {
             </span>
 
             <span>
-              ฿${income.toLocaleString()}
+              ฿${result.income.toLocaleString()}
             </span>
 
           </div>
@@ -1226,7 +1389,7 @@ function renderWeekHistory() {
             </span>
 
             <span>
-              ฿${expense.toLocaleString()}
+              ฿${result.expense.toLocaleString()}
             </span>
 
           </div>
@@ -1240,7 +1403,7 @@ function renderWeekHistory() {
 
             <span class="week-balance">
 
-              ฿${balance.toLocaleString()}
+              ฿${result.balance.toLocaleString()}
 
             </span>
 
@@ -1262,6 +1425,48 @@ function renderWeekHistory() {
 function viewWeek(key) {
 
   currentWeekKey = key;
+
+  render();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =================================
+   กลับสัปดาห์ปัจจุบัน
+================================= */
+
+function goToCurrentWeek() {
+
+  const realWeek =
+    getWeekKey();
+
+
+  if (
+    !allData[realWeek]
+  ) {
+
+    allData[realWeek] = {
+
+      weeklyMoney: 0,
+
+      transactions: []
+
+    };
+
+  }
+
+
+  currentWeekKey =
+    realWeek;
+
+
+  saveData();
 
   render();
 
@@ -1302,7 +1507,7 @@ function formatDate(dateString) {
 
 function escapeHTML(text) {
 
-  return text.replace(
+  return String(text).replace(
     /[&<>"']/g,
     function(character) {
 
@@ -1337,31 +1542,224 @@ function checkNewWeek() {
 
 
   if (
-    realWeek !== currentWeekKey
+    !allData[realWeek]
   ) {
 
-    currentWeekKey =
-      realWeek;
+    allData[realWeek] = {
 
+      weeklyMoney: 0,
 
-    if (
-      !allData[currentWeekKey]
-    ) {
+      transactions: []
 
-      allData[currentWeekKey] = {
-
-        weeklyMoney: 0,
-
-        transactions: []
-
-      };
-
-    }
-
-
-    saveData();
+    };
 
   }
+
+
+  currentWeekKey =
+    realWeek;
+
+
+  saveData();
+
+}
+
+
+/* =================================
+   สำรองข้อมูล
+================================= */
+
+function exportData() {
+
+  const data =
+    JSON.stringify(
+      allData,
+      null,
+      2
+    );
+
+
+  const blob =
+    new Blob(
+      [data],
+      {
+        type:
+          "application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href = url;
+
+  link.download =
+    "my-money-backup.json";
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+  document.body.removeChild(
+    link
+  );
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  alert(
+    "สำรองข้อมูลเรียบร้อยแล้ว 💾💗"
+  );
+
+}
+
+
+/* =================================
+   นำเข้าข้อมูล
+================================= */
+
+function importData(event) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) {
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e) {
+
+      try {
+
+        const imported =
+          JSON.parse(
+            e.target.result
+          );
+
+
+        if (
+          typeof imported !== "object" ||
+          imported === null
+        ) {
+
+          throw new Error();
+
+        }
+
+
+        for (
+          const key in imported
+        ) {
+
+          if (
+            !imported[key].transactions ||
+            !Array.isArray(
+              imported[key].transactions
+            )
+          ) {
+
+            throw new Error();
+
+          }
+
+        }
+
+
+        const confirmImport =
+          confirm(
+            "นำเข้าข้อมูลนี้ใช่ไหม?\nข้อมูลเดิมในเว็บจะถูกแทนที่"
+          );
+
+
+        if (
+          !confirmImport
+        ) {
+
+          event.target.value = "";
+
+          return;
+
+        }
+
+
+        allData =
+          imported;
+
+
+        const realWeek =
+          getWeekKey();
+
+
+        if (
+          !allData[realWeek]
+        ) {
+
+          allData[realWeek] = {
+
+            weeklyMoney: 0,
+
+            transactions: []
+
+          };
+
+        }
+
+
+        currentWeekKey =
+          realWeek;
+
+
+        saveData();
+
+        render();
+
+
+        alert(
+          "นำเข้าข้อมูลสำเร็จแล้ว 📂💗"
+        );
+
+
+      } catch(error) {
+
+        alert(
+          "ไฟล์นี้ไม่ใช่ไฟล์สำรองข้อมูลของ My Money ❌"
+        );
+
+      }
+
+
+      event.target.value = "";
+
+    };
+
+
+  reader.readAsText(file);
 
 }
 
@@ -1389,4 +1787,3 @@ render();
 
 </body>
 </html>
-```
