@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,17 +12,19 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  background:
-    linear-gradient(135deg, #fff4fb, #f5efff, #eef7ff);
+  background: linear-gradient(
+    135deg,
+    #fff1f8,
+    #f4edff,
+    #eef8ff
+  );
   color: #40364d;
 }
-
-/* CONTAINER */
 
 .container {
   max-width: 480px;
@@ -38,9 +41,9 @@ body {
 
 .header h1 {
   margin: 0;
-  font-size: 36px;
+  font-size: 38px;
   color: #b36bd4;
-  text-shadow: 2px 2px 0 #f4d9ff;
+  text-shadow: 2px 2px 0 #f5d8ff;
 }
 
 .header p {
@@ -52,25 +55,36 @@ body {
 /* CARD */
 
 .card {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.94);
   border-radius: 25px;
   padding: 20px;
   margin: 14px 0;
   box-shadow: 0 8px 25px rgba(160,120,190,0.12);
-  border: 1px solid rgba(255,255,255,0.8);
+}
+
+/* WEEK */
+
+.week-title {
+  text-align: center;
+  color: #8c62a8;
+  font-size: 15px;
+  margin-bottom: 8px;
 }
 
 /* BALANCE */
 
 .balance {
-  background: linear-gradient(135deg, #ead7ff, #fbdcf2);
+  background: linear-gradient(
+    135deg,
+    #ead7ff,
+    #fbdcf2
+  );
   text-align: center;
   padding: 25px 20px;
 }
 
 .balance small {
   color: #8c62a8;
-  font-size: 14px;
 }
 
 .balance h2 {
@@ -111,14 +125,29 @@ body {
   color: #d65b7b;
 }
 
-/* HEADINGS */
+/* TOTAL */
+
+.total-box {
+  background: #fff6d9;
+  color: #aa7c22;
+  text-align: center;
+  padding: 18px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+.total-box b {
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+/* TEXT */
 
 h3 {
   margin-top: 0;
   color: #76558d;
 }
-
-/* LABEL */
 
 label {
   display: block;
@@ -130,8 +159,7 @@ label {
 
 /* INPUT */
 
-input,
-select {
+input {
   width: 100%;
   padding: 13px;
   border: 2px solid #eee4f4;
@@ -141,12 +169,11 @@ select {
   outline: none;
 }
 
-input:focus,
-select:focus {
+input:focus {
   border-color: #d4a5e8;
 }
 
-/* TYPE BUTTONS */
+/* TYPE */
 
 .type-buttons {
   display: flex;
@@ -161,7 +188,6 @@ select:focus {
   background: #f1edf3;
   font-size: 15px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .type-buttons .active-income {
@@ -176,7 +202,7 @@ select:focus {
   font-weight: bold;
 }
 
-/* SAVE BUTTON */
+/* BUTTON */
 
 .save-btn {
   width: 100%;
@@ -184,7 +210,11 @@ select:focus {
   padding: 15px;
   border: none;
   border-radius: 16px;
-  background: linear-gradient(135deg, #b878d8, #d889b9);
+  background: linear-gradient(
+    135deg,
+    #b878d8,
+    #d889b9
+  );
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -192,11 +222,7 @@ select:focus {
   box-shadow: 0 5px 12px rgba(190,120,210,0.25);
 }
 
-.save-btn:hover {
-  transform: translateY(-1px);
-}
-
-/* TRANSACTION */
+/* HISTORY */
 
 .item {
   display: flex;
@@ -256,6 +282,44 @@ select:focus {
   cursor: pointer;
 }
 
+/* WEEK HISTORY */
+
+.week-history {
+  margin-top: 10px;
+}
+
+.week-card {
+  background: #faf7ff;
+  border: 2px solid #eee5fa;
+  border-radius: 18px;
+  padding: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.week-card:hover {
+  border-color: #d9b8ed;
+}
+
+.week-card h4 {
+  margin: 0 0 8px;
+  color: #79558d;
+}
+
+.week-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.week-balance {
+  font-weight: bold;
+  color: #8650b5;
+}
+
+/* EMPTY */
+
 .empty {
   text-align: center;
   color: #aaa;
@@ -267,7 +331,7 @@ select:focus {
 .container::before {
   content: "♡";
   position: fixed;
-  top: 30px;
+  top: 25px;
   left: 20px;
   font-size: 28px;
   color: #e7b8e9;
@@ -285,6 +349,7 @@ select:focus {
 }
 
 </style>
+
 </head>
 
 <body>
@@ -297,18 +362,75 @@ select:focus {
 
     <h1>My Money 💸</h1>
 
-    <p>บันทึกรายรับ - รายจ่ายรายสัปดาห์</p>
+    <p>
+      บันทึกรายรับ - รายจ่ายของฉัน
+    </p>
 
   </div>
 
 
-  <!-- BALANCE -->
+  <!-- CURRENT WEEK -->
 
-  <div class="card balance">
+  <div class="card">
 
-    <small>💰 เงินคงเหลือ</small>
+    <div
+      class="week-title"
+      id="currentWeek"
+    >
+      สัปดาห์นี้
+    </div>
 
-    <h2 id="balance">฿0</h2>
+    <div
+      class="balance"
+      style="border-radius:20px;"
+    >
+
+      <small>💵 เงินคงเหลือ</small>
+
+      <h2 id="balance">฿0</h2>
+
+    </div>
+
+
+    <!-- TOTAL MONEY -->
+
+    <div class="total-box">
+
+      💰 จำนวนเงินทั้งหมด
+
+      <b id="totalMoney">
+        ฿0
+      </b>
+
+    </div>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+    <div class="summary-box income">
+
+      🟢 รายรับ
+
+      <b id="income">
+        ฿0
+      </b>
+
+    </div>
+
+
+    <div class="summary-box expense">
+
+      🔴 รายจ่าย
+
+      <b id="expense">
+        ฿0
+      </b>
+
+    </div>
 
   </div>
 
@@ -317,7 +439,9 @@ select:focus {
 
   <div class="card">
 
-    <h3>📅 เงินประจำสัปดาห์</h3>
+    <h3>
+      📅 เงินประจำสัปดาห์
+    </h3>
 
     <label>
       เงินที่ได้รับในสัปดาห์นี้
@@ -339,38 +463,18 @@ select:focus {
   </div>
 
 
-  <!-- SUMMARY -->
-
-  <div class="summary">
-
-    <div class="summary-box income">
-
-      🟢 รายรับ
-
-      <b id="income">฿0</b>
-
-    </div>
-
-
-    <div class="summary-box expense">
-
-      🔴 รายจ่าย
-
-      <b id="expense">฿0</b>
-
-    </div>
-
-  </div>
-
-
   <!-- ADD TRANSACTION -->
 
   <div class="card">
 
-    <h3>➕ เพิ่มรายการ</h3>
+    <h3>
+      ➕ เพิ่มรายการ
+    </h3>
 
 
-    <label>วันที่</label>
+    <label>
+      วันที่
+    </label>
 
     <input
       type="date"
@@ -378,7 +482,9 @@ select:focus {
     >
 
 
-    <label>รายการ</label>
+    <label>
+      รายการ
+    </label>
 
     <input
       type="text"
@@ -387,7 +493,9 @@ select:focus {
     >
 
 
-    <label>ประเภท</label>
+    <label>
+      ประเภท
+    </label>
 
     <div class="type-buttons">
 
@@ -410,28 +518,9 @@ select:focus {
     </div>
 
 
-    <label>หมวดหมู่</label>
-
-    <select id="category">
-
-      <option>🍚 อาหาร</option>
-
-      <option>🧃 เครื่องดื่ม</option>
-
-      <option>🛍️ ช้อปปิ้ง</option>
-
-      <option>📚 การศึกษา</option>
-
-      <option>🎮 ความบันเทิง</option>
-
-      <option>🚗 การเดินทาง</option>
-
-      <option>💗 อื่น ๆ</option>
-
-    </select>
-
-
-    <label>จำนวนเงิน (บาท)</label>
+    <label>
+      จำนวนเงิน (บาท)
+    </label>
 
     <input
       type="number"
@@ -450,13 +539,31 @@ select:focus {
   </div>
 
 
-  <!-- HISTORY -->
+  <!-- TRANSACTION HISTORY -->
 
   <div class="card">
 
-    <h3>📋 ประวัติรายการ</h3>
+    <h3>
+      📋 รายการของสัปดาห์นี้
+    </h3>
 
     <div id="transactions"></div>
+
+  </div>
+
+
+  <!-- WEEK HISTORY -->
+
+  <div class="card">
+
+    <h3>
+      📚 ประวัติสัปดาห์
+    </h3>
+
+    <div
+      id="weekHistory"
+      class="week-history"
+    ></div>
 
   </div>
 
@@ -465,42 +572,149 @@ select:focus {
 
 <script>
 
-/* =========================
-   GOOGLE APPS SCRIPT
-========================= */
-
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbxV6Uzl3WIKcxlOYziLcjK09tJvHL202k06LOH1TjBWqeqYSVkCQG1YT5KSL22VOmGj/exec";
-
+/* =================================
+   DATA
+================================= */
 
 let type = "expense";
 
+let currentWeekKey = getWeekKey();
 
-let data = JSON.parse(
-  localStorage.getItem("myMoneyData")
-) || {
-
-  weeklyMoney: 0,
-
-  transactions: []
-
-};
+let allData =
+  JSON.parse(
+    localStorage.getItem("myMoneyWeeks")
+  ) || {};
 
 
-/* =========================
-   TYPE
-========================= */
+/* =================================
+   สร้างข้อมูลสัปดาห์
+================================= */
+
+if (!allData[currentWeekKey]) {
+
+  allData[currentWeekKey] = {
+
+    weeklyMoney: 0,
+
+    transactions: []
+
+  };
+
+}
+
+saveData();
+
+
+/* =================================
+   หาเลขสัปดาห์
+================================= */
+
+function getWeekNumber(date) {
+
+  const d =
+    new Date(
+      Date.UTC(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      )
+    );
+
+  const dayNum =
+    d.getUTCDay() || 7;
+
+  d.setUTCDate(
+    d.getUTCDate() + 4 - dayNum
+  );
+
+  const yearStart =
+    new Date(
+      Date.UTC(
+        d.getUTCFullYear(),
+        0,
+        1
+      )
+    );
+
+  return Math.ceil(
+    (
+      (
+        (d - yearStart) /
+        86400000
+      ) + 1
+    ) / 7
+  );
+
+}
+
+
+/* =================================
+   KEY ของสัปดาห์
+================================= */
+
+function getWeekKey(date = new Date()) {
+
+  const year =
+    date.getFullYear();
+
+  const week =
+    getWeekNumber(date);
+
+  return year + "-W" + week;
+
+}
+
+
+/* =================================
+   ชื่อสัปดาห์
+================================= */
+
+function getWeekText(key) {
+
+  const parts =
+    key.split("-W");
+
+  return (
+    "สัปดาห์ที่ " +
+    parts[1] +
+    " ปี " +
+    parts[0]
+  );
+
+}
+
+
+/* =================================
+   บันทึกข้อมูล
+================================= */
+
+function saveData() {
+
+  localStorage.setItem(
+    "myMoneyWeeks",
+    JSON.stringify(allData)
+  );
+
+}
+
+
+/* =================================
+   เลือกประเภท
+================================= */
 
 function setType(newType) {
 
   type = newType;
 
-
   const incomeBtn =
-    document.getElementById("incomeBtn");
+    document.getElementById(
+      "incomeBtn"
+    );
 
   const expenseBtn =
-    document.getElementById("expenseBtn");
+    document.getElementById(
+      "expenseBtn"
+    );
 
 
   incomeBtn.className = "";
@@ -523,30 +737,38 @@ function setType(newType) {
 }
 
 
-/* =========================
-   WEEKLY MONEY
-========================= */
+/* =================================
+   เงินประจำสัปดาห์
+================================= */
 
 function saveWeeklyMoney() {
 
   const money =
     Number(
-      document.getElementById("weeklyMoney").value
+      document.getElementById(
+        "weeklyMoney"
+      ).value
     );
 
 
   if (money < 0) {
 
-    alert("กรุณากรอกจำนวนเงินให้ถูกต้อง");
+    alert(
+      "กรุณากรอกจำนวนเงินให้ถูกต้อง"
+    );
 
     return;
 
   }
 
 
-  data.weeklyMoney = money;
+  allData[currentWeekKey]
+    .weeklyMoney = money;
 
-  saveLocal();
+
+  saveData();
+
+  render();
 
 
   alert(
@@ -556,14 +778,16 @@ function saveWeeklyMoney() {
 }
 
 
-/* =========================
-   ADD TRANSACTION
-========================= */
+/* =================================
+   เพิ่มรายการ
+================================= */
 
-async function addTransaction() {
+function addTransaction() {
 
   const date =
-    document.getElementById("date").value;
+    document.getElementById(
+      "date"
+    ).value;
 
 
   const name =
@@ -573,17 +797,19 @@ async function addTransaction() {
       .trim();
 
 
-  const category =
-    document.getElementById("category").value;
-
-
   const amount =
     Number(
-      document.getElementById("amount").value
+      document.getElementById(
+        "amount"
+      ).value
     );
 
 
-  if (!date || !name || amount <= 0) {
+  if (
+    !date ||
+    !name ||
+    amount <= 0
+  ) {
 
     alert(
       "กรุณากรอกข้อมูลให้ครบถ้วน 💗"
@@ -604,208 +830,157 @@ async function addTransaction() {
 
     type: type,
 
-    category: category,
-
     amount: amount
 
   };
 
 
-  data.transactions.push(transaction);
+  allData[currentWeekKey]
+    .transactions
+    .push(transaction);
 
 
-  saveLocal();
+  saveData();
 
   render();
 
 
-  /* ส่งข้อมูลเข้า Google Sheets */
-
-  try {
-
-    await fetch(SCRIPT_URL, {
-
-      method: "POST",
-
-      mode: "no-cors",
-
-      headers: {
-
-        "Content-Type":
-        "text/plain;charset=utf-8"
-
-      },
-
-      body: JSON.stringify({
-
-        date: date,
-
-        name: name,
-
-        type: type,
-
-        category: category,
-
-        amount: amount,
-
-        week: getWeek(date)
-
-      })
-
-    });
+  document.getElementById(
+    "name"
+  ).value = "";
 
 
-    alert(
-      "บันทึกรายการเรียบร้อยแล้ว 💜"
-    );
+  document.getElementById(
+    "amount"
+  ).value = "";
 
 
-  } catch (error) {
-
-    alert(
-      "บันทึกไว้ในเครื่องแล้ว แต่ไม่สามารถเชื่อมต่อ Google Sheets ได้"
-    );
-
-  }
-
-
-  document.getElementById("name").value = "";
-
-  document.getElementById("amount").value = "";
-
-}
-
-
-/* =========================
-   WEEK
-========================= */
-
-function getWeek(dateString) {
-
-  const date =
-    new Date(dateString);
-
-
-  const firstDay =
-    new Date(
-      date.getFullYear(),
-      0,
-      1
-    );
-
-
-  const days =
-    Math.floor(
-      (date - firstDay) /
-      (24 * 60 * 60 * 1000)
-    );
-
-
-  return (
-    "สัปดาห์ที่ " +
-    Math.ceil(
-      (days +
-       firstDay.getDay() +
-       1) / 7
-    )
+  alert(
+    "บันทึกรายการแล้ว 💜"
   );
 
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* =================================
+   ลบรายการ
+================================= */
 
 function deleteTransaction(id) {
 
-  data.transactions =
-    data.transactions.filter(
-      item => item.id !== id
-    );
+  allData[currentWeekKey]
+    .transactions =
+      allData[currentWeekKey]
+        .transactions
+        .filter(
+          item => item.id !== id
+        );
 
 
-  saveLocal();
-
-  render();
-
-}
-
-
-/* =========================
-   SAVE LOCAL
-========================= */
-
-function saveLocal() {
-
-  localStorage.setItem(
-
-    "myMoneyData",
-
-    JSON.stringify(data)
-
-  );
-
+  saveData();
 
   render();
 
 }
 
 
-/* =========================
-   RENDER
-========================= */
+/* =================================
+   แสดงข้อมูลสัปดาห์ปัจจุบัน
+================================= */
 
 function render() {
 
+  const week =
+    allData[currentWeekKey];
+
+
   let income =
-    data.weeklyMoney;
+    week.weeklyMoney;
 
 
   let expense = 0;
 
 
-  data.transactions.forEach(item => {
+  week.transactions
+    .forEach(item => {
 
-    if (item.type === "income") {
+      if (
+        item.type === "income"
+      ) {
 
-      income += item.amount;
+        income += item.amount;
 
-    } else {
+      } else {
 
-      expense += item.amount;
+        expense += item.amount;
 
-    }
+      }
 
-  });
+    });
+
+
+  const totalMoney =
+    income;
 
 
   const balance =
     income - expense;
 
 
-  document.getElementById("income")
-    .innerText =
+  document.getElementById(
+    "currentWeek"
+  ).innerText =
+    getWeekText(
+      currentWeekKey
+    );
+
+
+  document.getElementById(
+    "totalMoney"
+  ).innerText =
+    "฿" +
+    totalMoney.toLocaleString();
+
+
+  document.getElementById(
+    "income"
+  ).innerText =
     "฿" +
     income.toLocaleString();
 
 
-  document.getElementById("expense")
-    .innerText =
+  document.getElementById(
+    "expense"
+  ).innerText =
     "฿" +
     expense.toLocaleString();
 
 
-  document.getElementById("balance")
-    .innerText =
+  document.getElementById(
+    "balance"
+  ).innerText =
     "฿" +
     balance.toLocaleString();
 
 
-  document.getElementById("weeklyMoney")
-    .value =
-    data.weeklyMoney || "";
+  document.getElementById(
+    "weeklyMoney"
+  ).value =
+    week.weeklyMoney || "";
 
+
+  renderTransactions();
+
+  renderWeekHistory();
+
+}
+
+
+/* =================================
+   แสดงรายการ
+================================= */
+
+function renderTransactions() {
 
   const container =
     document.getElementById(
@@ -813,7 +988,14 @@ function render() {
     );
 
 
-  if (data.transactions.length === 0) {
+  const transactions =
+    allData[currentWeekKey]
+      .transactions;
+
+
+  if (
+    transactions.length === 0
+  ) {
 
     container.innerHTML =
 
@@ -829,18 +1011,14 @@ function render() {
 
 
   const sorted =
-    [...data.transactions].sort(
-
-      (a, b) =>
-
+    [...transactions].sort(
+      (a,b) =>
         new Date(b.date) -
         new Date(a.date)
-
     );
 
 
   container.innerHTML =
-
     sorted.map(item => {
 
       const isIncome =
@@ -855,9 +1033,11 @@ function render() {
 
             <div class="icon">
 
-              ${isIncome
+              ${
+                isIncome
                 ? "💰"
-                : "🛍️"}
+                : "🛍️"
+              }
 
             </div>
 
@@ -875,12 +1055,8 @@ function render() {
 
               <div class="item-date">
 
-                ${item.date}
-
-                •
-
-                ${escapeHTML(
-                  item.category
+                ${formatDate(
+                  item.date
                 )}
 
               </div>
@@ -898,9 +1074,11 @@ function render() {
               : "expense-text"
             }">
 
-              ${isIncome
+              ${
+                isIncome
                 ? "+"
-                : "-"}
+                : "-"
+              }
 
               ฿${item.amount.toLocaleString()}
 
@@ -934,16 +1112,198 @@ function render() {
 }
 
 
-/* =========================
-   SECURITY
-========================= */
+/* =================================
+   ประวัติสัปดาห์
+================================= */
+
+function renderWeekHistory() {
+
+  const container =
+    document.getElementById(
+      "weekHistory"
+    );
+
+
+  const keys =
+    Object.keys(allData)
+      .sort()
+      .reverse();
+
+
+  if (keys.length === 0) {
+
+    container.innerHTML =
+      `<div class="empty">
+        ยังไม่มีประวัติ
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    keys.map(key => {
+
+      const week =
+        allData[key];
+
+
+      let income =
+        week.weeklyMoney;
+
+
+      let expense = 0;
+
+
+      week.transactions
+        .forEach(item => {
+
+          if (
+            item.type === "income"
+          ) {
+
+            income += item.amount;
+
+          } else {
+
+            expense += item.amount;
+
+          }
+
+        });
+
+
+      const balance =
+        income - expense;
+
+
+      const isCurrent =
+        key === currentWeekKey;
+
+
+      return `
+
+        <div
+          class="week-card"
+          onclick="
+            viewWeek('${key}')
+          "
+        >
+
+          <h4>
+
+            ${
+              getWeekText(key)
+            }
+
+            ${
+              isCurrent
+              ? " ⭐"
+              : ""
+            }
+
+          </h4>
+
+
+          <div class="week-info">
+
+            <span>
+              🟢 รายรับ
+            </span>
+
+            <span>
+              ฿${income.toLocaleString()}
+            </span>
+
+          </div>
+
+
+          <div class="week-info">
+
+            <span>
+              🔴 รายจ่าย
+            </span>
+
+            <span>
+              ฿${expense.toLocaleString()}
+            </span>
+
+          </div>
+
+
+          <div class="week-info">
+
+            <span>
+              💵 คงเหลือ
+            </span>
+
+            <span class="week-balance">
+
+              ฿${balance.toLocaleString()}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =================================
+   ดูสัปดาห์
+================================= */
+
+function viewWeek(key) {
+
+  currentWeekKey = key;
+
+  render();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =================================
+   วันที่ภาษาไทย
+================================= */
+
+function formatDate(dateString) {
+
+  const date =
+    new Date(dateString);
+
+
+  return date.toLocaleDateString(
+    "th-TH",
+    {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    }
+  );
+
+}
+
+
+/* =================================
+   ป้องกัน HTML
+================================= */
 
 function escapeHTML(text) {
 
   return text.replace(
-
     /[&<>"']/g,
-
     function(character) {
 
       return {
@@ -961,27 +1321,67 @@ function escapeHTML(text) {
       }[character];
 
     }
-
   );
 
 }
 
 
-/* =========================
-   DEFAULT DATE
-========================= */
+/* =================================
+   ตรวจสอบสัปดาห์ใหม่
+================================= */
+
+function checkNewWeek() {
+
+  const realWeek =
+    getWeekKey();
+
+
+  if (
+    realWeek !== currentWeekKey
+  ) {
+
+    currentWeekKey =
+      realWeek;
+
+
+    if (
+      !allData[currentWeekKey]
+    ) {
+
+      allData[currentWeekKey] = {
+
+        weeklyMoney: 0,
+
+        transactions: []
+
+      };
+
+    }
+
+
+    saveData();
+
+  }
+
+}
+
+
+/* =================================
+   วันที่เริ่มต้น
+================================= */
 
 document.getElementById("date")
   .value =
-
   new Date()
     .toISOString()
     .split("T")[0];
 
 
-/* =========================
-   START
-========================= */
+/* =================================
+   เริ่มเว็บ
+================================= */
+
+checkNewWeek();
 
 render();
 
