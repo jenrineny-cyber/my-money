@@ -1,110 +1,152 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>My Money 💸</title>
 
 <style>
+
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f7f3ff;
-  color: #302b3d;
+  background:
+    linear-gradient(135deg, #fff4fb, #f5efff, #eef7ff);
+  color: #40364d;
 }
+
+/* CONTAINER */
 
 .container {
   max-width: 480px;
   margin: auto;
-  padding: 20px 16px 40px;
+  padding: 20px 16px 50px;
 }
+
+/* HEADER */
 
 .header {
   text-align: center;
-  padding: 10px 0 18px;
+  padding: 15px 0 20px;
 }
 
 .header h1 {
   margin: 0;
-  color: #7654c7;
-  font-size: 34px;
+  font-size: 36px;
+  color: #b36bd4;
+  text-shadow: 2px 2px 0 #f4d9ff;
 }
 
 .header p {
-  color: #888;
-  margin: 6px 0;
+  color: #9a8da6;
+  margin: 8px 0;
+  font-size: 14px;
 }
+
+/* CARD */
 
 .card {
-  background: white;
-  border-radius: 22px;
-  padding: 18px;
-  margin: 12px 0;
-  box-shadow: 0 5px 20px rgba(0,0,0,.07);
+  background: rgba(255,255,255,0.9);
+  border-radius: 25px;
+  padding: 20px;
+  margin: 14px 0;
+  box-shadow: 0 8px 25px rgba(160,120,190,0.12);
+  border: 1px solid rgba(255,255,255,0.8);
 }
 
+/* BALANCE */
+
 .balance {
-  background: #eadfff;
+  background: linear-gradient(135deg, #ead7ff, #fbdcf2);
   text-align: center;
+  padding: 25px 20px;
 }
 
 .balance small {
-  color: #7254ad;
+  color: #8c62a8;
+  font-size: 14px;
 }
 
 .balance h2 {
-  font-size: 38px;
-  margin: 7px 0;
-  color: #6846b5;
+  font-size: 40px;
+  margin: 8px 0 0;
+  color: #8650b5;
 }
+
+/* SUMMARY */
 
 .summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
+  margin: 14px 0;
 }
 
 .summary-box {
   text-align: center;
-  padding: 15px;
-  border-radius: 18px;
-}
-
-.income {
-  background: #e5f8ec;
-  color: #278f50;
-}
-
-.expense {
-  background: #ffe8e8;
-  color: #d14b4b;
+  padding: 18px 10px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 .summary-box b {
   display: block;
   font-size: 21px;
-  margin-top: 5px;
+  margin-top: 7px;
 }
+
+.income {
+  background: #e2f8eb;
+  color: #3c9b61;
+}
+
+.expense {
+  background: #ffe5ee;
+  color: #d65b7b;
+}
+
+/* HEADINGS */
+
+h3 {
+  margin-top: 0;
+  color: #76558d;
+}
+
+/* LABEL */
 
 label {
   display: block;
   font-weight: bold;
   font-size: 14px;
-  margin: 12px 0 6px;
+  margin: 13px 0 6px;
+  color: #66566f;
 }
 
-input, select {
+/* INPUT */
+
+input,
+select {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 13px;
-  background: #faf9ff;
+  padding: 13px;
+  border: 2px solid #eee4f4;
+  border-radius: 15px;
+  background: #fffaff;
   font-size: 15px;
+  outline: none;
 }
+
+input:focus,
+select:focus {
+  border-color: #d4a5e8;
+}
+
+/* TYPE BUTTONS */
 
 .type-buttons {
   display: flex;
@@ -113,41 +155,55 @@ input, select {
 
 .type-buttons button {
   flex: 1;
-  padding: 12px;
+  padding: 13px;
   border: none;
-  border-radius: 13px;
-  background: #eee;
+  border-radius: 15px;
+  background: #f1edf3;
   font-size: 15px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .type-buttons .active-income {
-  background: #bfeccd;
+  background: #c9efd8;
+  color: #318653;
+  font-weight: bold;
 }
 
 .type-buttons .active-expense {
-  background: #ffcaca;
+  background: #ffd0df;
+  color: #c44d70;
+  font-weight: bold;
 }
+
+/* SAVE BUTTON */
 
 .save-btn {
   width: 100%;
-  margin-top: 16px;
-  padding: 14px;
+  margin-top: 17px;
+  padding: 15px;
   border: none;
-  border-radius: 14px;
-  background: #7654c7;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #b878d8, #d889b9);
   color: white;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 5px 12px rgba(190,120,210,0.25);
 }
+
+.save-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* TRANSACTION */
 
 .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 0;
-  border-bottom: 1px solid #eee;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0eaf3;
 }
 
 .item:last-child {
@@ -161,46 +217,73 @@ input, select {
 }
 
 .icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: #f1edff;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: #f6edff;
   display: grid;
   place-items: center;
+  font-size: 20px;
 }
 
 .item-name {
   font-weight: bold;
+  font-size: 14px;
 }
 
 .item-date {
   font-size: 12px;
-  color: #999;
-  margin-top: 3px;
+  color: #aaa;
+  margin-top: 4px;
 }
 
 .income-text {
-  color: #278f50;
+  color: #3d9b62;
   font-weight: bold;
 }
 
 .expense-text {
-  color: #d14b4b;
+  color: #d45676;
   font-weight: bold;
 }
 
 .delete-btn {
   border: none;
-  background: none;
-  color: #aaa;
+  background: #fff0f4;
+  color: #c8899d;
+  border-radius: 8px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
 .empty {
   text-align: center;
   color: #aaa;
-  padding: 15px;
+  padding: 20px;
 }
+
+/* DECORATION */
+
+.container::before {
+  content: "♡";
+  position: fixed;
+  top: 30px;
+  left: 20px;
+  font-size: 28px;
+  color: #e7b8e9;
+  opacity: .7;
+}
+
+.container::after {
+  content: "✦";
+  position: fixed;
+  bottom: 30px;
+  right: 25px;
+  font-size: 25px;
+  color: #c7b2ed;
+  opacity: .7;
+}
+
 </style>
 </head>
 
@@ -208,68 +291,103 @@ input, select {
 
 <div class="container">
 
+  <!-- HEADER -->
+
   <div class="header">
+
     <h1>My Money 💸</h1>
-    <p>Weekly Income & Expense Tracker</p>
+
+    <p>บันทึกรายรับ - รายจ่ายรายสัปดาห์</p>
+
   </div>
 
+
+  <!-- BALANCE -->
+
   <div class="card balance">
-    <small>💰 Current Balance</small>
+
+    <small>💰 เงินคงเหลือ</small>
+
     <h2 id="balance">฿0</h2>
+
   </div>
+
+
+  <!-- WEEKLY MONEY -->
 
   <div class="card">
 
-    <h3>📅 Weekly Allowance</h3>
+    <h3>📅 เงินประจำสัปดาห์</h3>
 
-    <label>Money received this week</label>
+    <label>
+      เงินที่ได้รับในสัปดาห์นี้
+    </label>
 
     <input
       type="number"
       id="weeklyMoney"
-      placeholder="Example: 500"
+      placeholder="เช่น 500"
     >
 
     <button
       class="save-btn"
       onclick="saveWeeklyMoney()"
     >
-      💾 Save Weekly Money
+      💾 บันทึกเงินประจำสัปดาห์
     </button>
 
   </div>
 
+
+  <!-- SUMMARY -->
+
   <div class="summary">
 
     <div class="summary-box income">
-      🟢 Income
+
+      🟢 รายรับ
+
       <b id="income">฿0</b>
+
     </div>
 
+
     <div class="summary-box expense">
-      🔴 Expenses
+
+      🔴 รายจ่าย
+
       <b id="expense">฿0</b>
+
     </div>
 
   </div>
 
+
+  <!-- ADD TRANSACTION -->
+
   <div class="card">
 
-    <h3>➕ Add Transaction</h3>
+    <h3>➕ เพิ่มรายการ</h3>
 
-    <label>Date</label>
 
-    <input type="date" id="date">
+    <label>วันที่</label>
 
-    <label>Description</label>
+    <input
+      type="date"
+      id="date"
+    >
+
+
+    <label>รายการ</label>
 
     <input
       type="text"
       id="name"
-      placeholder="Example: Lunch"
+      placeholder="เช่น ซื้อข้าว"
     >
 
-    <label>Type</label>
+
+    <label>ประเภท</label>
 
     <div class="type-buttons">
 
@@ -277,53 +395,66 @@ input, select {
         id="incomeBtn"
         onclick="setType('income')"
       >
-        🟢 Income
+        🟢 รายรับ
       </button>
+
 
       <button
         id="expenseBtn"
         class="active-expense"
         onclick="setType('expense')"
       >
-        🔴 Expense
+        🔴 รายจ่าย
       </button>
 
     </div>
 
-    <label>Category</label>
+
+    <label>หมวดหมู่</label>
 
     <select id="category">
 
-      <option>🍚 Food</option>
-      <option>🧃 Drinks</option>
-      <option>🛍️ Shopping</option>
-      <option>📚 Education</option>
-      <option>🎮 Entertainment</option>
-      <option>🚗 Transportation</option>
-      <option>Other</option>
+      <option>🍚 อาหาร</option>
+
+      <option>🧃 เครื่องดื่ม</option>
+
+      <option>🛍️ ช้อปปิ้ง</option>
+
+      <option>📚 การศึกษา</option>
+
+      <option>🎮 ความบันเทิง</option>
+
+      <option>🚗 การเดินทาง</option>
+
+      <option>💗 อื่น ๆ</option>
 
     </select>
 
-    <label>Amount (THB)</label>
+
+    <label>จำนวนเงิน (บาท)</label>
 
     <input
       type="number"
       id="amount"
-      placeholder="Example: 40"
+      placeholder="เช่น 40"
     >
+
 
     <button
       class="save-btn"
       onclick="addTransaction()"
     >
-      💾 Save Transaction
+      💾 บันทึกรายการ
     </button>
 
   </div>
 
+
+  <!-- HISTORY -->
+
   <div class="card">
 
-    <h3>📋 Transaction History</h3>
+    <h3>📋 ประวัติรายการ</h3>
 
     <div id="transactions"></div>
 
@@ -331,10 +462,11 @@ input, select {
 
 </div>
 
+
 <script>
 
 /* =========================
-   GOOGLE APPS SCRIPT URL
+   GOOGLE APPS SCRIPT
 ========================= */
 
 const SCRIPT_URL =
@@ -343,11 +475,15 @@ const SCRIPT_URL =
 
 let type = "expense";
 
+
 let data = JSON.parse(
   localStorage.getItem("myMoneyData")
 ) || {
+
   weeklyMoney: 0,
+
   transactions: []
+
 };
 
 
@@ -359,14 +495,18 @@ function setType(newType) {
 
   type = newType;
 
+
   const incomeBtn =
     document.getElementById("incomeBtn");
 
   const expenseBtn =
     document.getElementById("expenseBtn");
 
+
   incomeBtn.className = "";
+
   expenseBtn.className = "";
+
 
   if (type === "income") {
 
@@ -394,19 +534,23 @@ function saveWeeklyMoney() {
       document.getElementById("weeklyMoney").value
     );
 
+
   if (money < 0) {
 
-    alert("Please enter a valid amount.");
+    alert("กรุณากรอกจำนวนเงินให้ถูกต้อง");
 
     return;
+
   }
+
 
   data.weeklyMoney = money;
 
   saveLocal();
 
+
   alert(
-    "Weekly money saved successfully! 💰"
+    "บันทึกเงินประจำสัปดาห์แล้ว 💰"
   );
 
 }
@@ -421,11 +565,17 @@ async function addTransaction() {
   const date =
     document.getElementById("date").value;
 
+
   const name =
-    document.getElementById("name").value.trim();
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
 
   const category =
     document.getElementById("category").value;
+
 
   const amount =
     Number(
@@ -435,9 +585,12 @@ async function addTransaction() {
 
   if (!date || !name || amount <= 0) {
 
-    alert("Please complete all information.");
+    alert(
+      "กรุณากรอกข้อมูลให้ครบถ้วน 💗"
+    );
 
     return;
+
   }
 
 
@@ -460,12 +613,13 @@ async function addTransaction() {
 
   data.transactions.push(transaction);
 
+
   saveLocal();
 
   render();
 
 
-  /* Send data to Google Sheets */
+  /* ส่งข้อมูลเข้า Google Sheets */
 
   try {
 
@@ -476,7 +630,10 @@ async function addTransaction() {
       mode: "no-cors",
 
       headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+
+        "Content-Type":
+        "text/plain;charset=utf-8"
+
       },
 
       body: JSON.stringify({
@@ -497,14 +654,16 @@ async function addTransaction() {
 
     });
 
+
     alert(
-      "Saved successfully! 💜"
+      "บันทึกรายการเรียบร้อยแล้ว 💜"
     );
+
 
   } catch (error) {
 
     alert(
-      "Saved on this device, but could not connect to Google Sheets."
+      "บันทึกไว้ในเครื่องแล้ว แต่ไม่สามารถเชื่อมต่อ Google Sheets ได้"
     );
 
   }
@@ -518,13 +677,14 @@ async function addTransaction() {
 
 
 /* =========================
-   WEEK NUMBER
+   WEEK
 ========================= */
 
 function getWeek(dateString) {
 
   const date =
     new Date(dateString);
+
 
   const firstDay =
     new Date(
@@ -533,16 +693,20 @@ function getWeek(dateString) {
       1
     );
 
+
   const days =
     Math.floor(
       (date - firstDay) /
       (24 * 60 * 60 * 1000)
     );
 
+
   return (
-    "Week " +
+    "สัปดาห์ที่ " +
     Math.ceil(
-      (days + firstDay.getDay() + 1) / 7
+      (days +
+       firstDay.getDay() +
+       1) / 7
     )
   );
 
@@ -560,6 +724,7 @@ function deleteTransaction(id) {
       item => item.id !== id
     );
 
+
   saveLocal();
 
   render();
@@ -574,9 +739,13 @@ function deleteTransaction(id) {
 function saveLocal() {
 
   localStorage.setItem(
+
     "myMoneyData",
+
     JSON.stringify(data)
+
   );
+
 
   render();
 
@@ -591,6 +760,7 @@ function render() {
 
   let income =
     data.weeklyMoney;
+
 
   let expense = 0;
 
@@ -616,17 +786,20 @@ function render() {
 
   document.getElementById("income")
     .innerText =
-    "฿" + income.toLocaleString();
+    "฿" +
+    income.toLocaleString();
 
 
   document.getElementById("expense")
     .innerText =
-    "฿" + expense.toLocaleString();
+    "฿" +
+    expense.toLocaleString();
 
 
   document.getElementById("balance")
     .innerText =
-    "฿" + balance.toLocaleString();
+    "฿" +
+    balance.toLocaleString();
 
 
   document.getElementById("weeklyMoney")
@@ -643,8 +816,11 @@ function render() {
   if (data.transactions.length === 0) {
 
     container.innerHTML =
+
       `<div class="empty">
-        No transactions yet ✨
+
+        ยังไม่มีรายการ ✨
+
       </div>`;
 
     return;
@@ -654,17 +830,22 @@ function render() {
 
   const sorted =
     [...data.transactions].sort(
+
       (a, b) =>
+
         new Date(b.date) -
         new Date(a.date)
+
     );
 
 
   container.innerHTML =
+
     sorted.map(item => {
 
       const isIncome =
         item.type === "income";
+
 
       return `
 
@@ -673,18 +854,35 @@ function render() {
           <div class="item-info">
 
             <div class="icon">
-              ${isIncome ? "💰" : "🛍️"}
+
+              ${isIncome
+                ? "💰"
+                : "🛍️"}
+
             </div>
+
 
             <div>
 
               <div class="item-name">
-                ${escapeHTML(item.name)}
+
+                ${escapeHTML(
+                  item.name
+                )}
+
               </div>
 
+
               <div class="item-date">
-                ${item.date} •
-                ${escapeHTML(item.category)}
+
+                ${item.date}
+
+                •
+
+                ${escapeHTML(
+                  item.category
+                )}
+
               </div>
 
             </div>
@@ -700,17 +898,29 @@ function render() {
               : "expense-text"
             }">
 
-              ${isIncome ? "+" : "-"}
+              ${isIncome
+                ? "+"
+                : "-"}
+
               ฿${item.amount.toLocaleString()}
 
             </span>
 
 
             <button
+
               class="delete-btn"
-              onclick="deleteTransaction(${item.id})"
+
+              onclick="
+                deleteTransaction(
+                  ${item.id}
+                )
+              "
+
             >
+
               ✕
+
             </button>
 
           </div>
@@ -731,20 +941,27 @@ function render() {
 function escapeHTML(text) {
 
   return text.replace(
+
     /[&<>"']/g,
+
     function(character) {
 
       return {
 
         "&": "&amp;",
+
         "<": "&lt;",
+
         ">": "&gt;",
+
         '"': "&quot;",
+
         "'": "&#039;"
 
       }[character];
 
     }
+
   );
 
 }
@@ -756,9 +973,10 @@ function escapeHTML(text) {
 
 document.getElementById("date")
   .value =
+
   new Date()
-  .toISOString()
-  .split("T")[0];
+    .toISOString()
+    .split("T")[0];
 
 
 /* =========================
@@ -771,3 +989,4 @@ render();
 
 </body>
 </html>
+```
