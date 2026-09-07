@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -142,6 +143,7 @@ label {
   color: #66566f;
 }
 
+/* ช่องกรอกทุกช่องขนาดเท่ากัน */
 input {
   width: 100%;
   height: 46px;
@@ -157,22 +159,14 @@ input:focus {
   border-color: #d4a5e8;
 }
 
-/* =========================
-   ช่องวันที่โดยเฉพาะ
-========================= */
-
+/* ช่องวันที่ขนาดเท่าช่องรายการ */
 input[type="date"] {
-  width: 60%;
-  height: 36px;
-  padding: 5px 8px;
-  font-size: 12px;
-  border-radius: 12px;
+  width: 100%;
+  height: 46px;
+  padding: 13px;
+  font-size: 15px;
+  border-radius: 15px;
 }
-
-
-/* =========================
-   ปุ่มรายรับ / รายจ่าย
-========================= */
 
 .type-buttons {
   display: flex;
@@ -181,6 +175,7 @@ input[type="date"] {
 
 .type-buttons button {
   flex: 1;
+  min-width: 0;
   padding: 13px;
   border: none;
   border-radius: 15px;
@@ -201,11 +196,6 @@ input[type="date"] {
   font-weight: bold;
 }
 
-
-/* =========================
-   ปุ่มบันทึก
-========================= */
-
 .save-btn {
   width: 100%;
   margin-top: 17px;
@@ -224,11 +214,6 @@ input[type="date"] {
   transform: scale(0.98);
 }
 
-
-/* =========================
-   ปุ่มกลับ
-========================= */
-
 .back-btn {
   width: 100%;
   padding: 12px;
@@ -245,11 +230,6 @@ input[type="date"] {
 .back-btn:hover {
   background: #e3d1f2;
 }
-
-
-/* =========================
-   สำรองข้อมูล
-========================= */
 
 .backup-box {
   display: grid;
@@ -284,11 +264,6 @@ input[type="date"] {
   margin: 12px 0 0;
   line-height: 1.5;
 }
-
-
-/* =========================
-   รายการ
-========================= */
 
 .item {
   display: flex;
@@ -326,6 +301,7 @@ input[type="date"] {
   font-weight: bold;
   font-size: 14px;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .item-date {
@@ -356,11 +332,6 @@ input[type="date"] {
   padding: 6px 8px;
 }
 
-
-/* =========================
-   ประวัติสัปดาห์
-========================= */
-
 .week-history {
   margin-top: 10px;
 }
@@ -386,8 +357,14 @@ input[type="date"] {
 .week-info {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   font-size: 13px;
   margin: 4px 0;
+}
+
+.week-info span:last-child {
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 
 .week-balance {
@@ -400,11 +377,6 @@ input[type="date"] {
   color: #aaa;
   padding: 20px;
 }
-
-
-/* =========================
-   ของตกแต่ง
-========================= */
 
 .container::before {
   content: "♡";
@@ -450,6 +422,7 @@ input[type="date"] {
 
   .header p {
     font-size: 13px;
+    margin-top: 6px;
   }
 
   .card {
@@ -458,12 +431,27 @@ input[type="date"] {
     border-radius: 20px;
   }
 
+  .week-title {
+    font-size: 14px;
+  }
+
   .balance {
     padding: 20px 10px;
+    border-radius: 18px;
   }
 
   .balance h2 {
     font-size: 32px;
+  }
+
+  .total-box {
+    padding: 15px 10px;
+    border-radius: 17px;
+    margin-top: 9px;
+  }
+
+  .total-box b {
+    font-size: 21px;
   }
 
   .summary {
@@ -479,6 +467,7 @@ input[type="date"] {
 
   .summary-box b {
     font-size: 18px;
+    margin-top: 5px;
   }
 
   label {
@@ -486,19 +475,21 @@ input[type="date"] {
     margin-top: 11px;
   }
 
+  /* ช่องทั้งหมดเท่ากันบนมือถือ */
   input {
+    width: 100%;
     height: 43px;
     padding: 11px;
     font-size: 14px;
+    border-radius: 13px;
   }
 
-  /* วันที่บนมือถือ */
   input[type="date"] {
-    width: 60%;
-    height: 36px;
-    padding: 5px 8px;
-    font-size: 12px;
-    border-radius: 12px;
+    width: 100%;
+    height: 43px;
+    padding: 11px;
+    font-size: 14px;
+    border-radius: 13px;
   }
 
   .type-buttons {
@@ -515,6 +506,7 @@ input[type="date"] {
     padding: 13px;
     margin-top: 14px;
     font-size: 14px;
+    border-radius: 14px;
   }
 
   .back-btn {
@@ -524,6 +516,11 @@ input[type="date"] {
 
   .item {
     padding: 12px 0;
+    gap: 5px;
+  }
+
+  .item-info {
+    gap: 8px;
   }
 
   .icon {
@@ -549,16 +546,47 @@ input[type="date"] {
   .delete-btn {
     font-size: 11px;
     padding: 5px 7px;
+    margin-left: 2px;
   }
 
   .week-card {
     padding: 13px;
     border-radius: 16px;
+    margin: 8px 0;
+  }
+
+  .week-card h4 {
+    font-size: 14px;
+  }
+
+  .week-info {
+    font-size: 12px;
+  }
+
+  .backup-box {
+    gap: 7px;
   }
 
   .backup-btn {
     padding: 11px 4px;
     font-size: 12px;
+    border-radius: 13px;
+  }
+
+  .backup-note {
+    font-size: 11px;
+  }
+
+  .container::before {
+    top: 10px;
+    left: 8px;
+    font-size: 22px;
+  }
+
+  .container::after {
+    bottom: 15px;
+    right: 10px;
+    font-size: 20px;
   }
 
 }
@@ -595,10 +623,21 @@ input[type="date"] {
     max-width: 105px;
   }
 
-  input[type="date"] {
-    width: 60%;
-    height: 35px;
+  .income-text,
+  .expense-text {
     font-size: 11px;
+  }
+
+  .delete-btn {
+    padding: 5px 6px;
+  }
+
+  /* วันที่ยังเท่าช่องอื่น */
+  input[type="date"] {
+    width: 100%;
+    height: 43px;
+    padding: 11px;
+    font-size: 13px;
   }
 
 }
@@ -610,7 +649,6 @@ input[type="date"] {
 <body>
 
 <div class="container">
-
 
   <!-- HEADER -->
 
@@ -672,7 +710,7 @@ input[type="date"] {
   </div>
 
 
-  <!-- รายรับรายจ่าย -->
+  <!-- รายรับ / รายจ่าย -->
 
   <div class="summary">
 
@@ -887,7 +925,6 @@ input[type="date"] {
 
 <script>
 
-
 let type = "expense";
 
 let currentWeekKey =
@@ -895,9 +932,7 @@ let currentWeekKey =
 
 let allData =
   JSON.parse(
-    localStorage.getItem(
-      "myMoneyWeeks"
-    )
+    localStorage.getItem("myMoneyWeeks")
   ) || {};
 
 
@@ -915,10 +950,6 @@ if (!allData[currentWeekKey]) {
 
 saveData();
 
-
-/* =========================
-   หาสัปดาห์
-========================= */
 
 function getWeekNumber(date) {
 
@@ -993,10 +1024,6 @@ function getWeekText(key) {
 }
 
 
-/* =========================
-   บันทึกข้อมูล
-========================= */
-
 function saveData() {
 
   localStorage.setItem(
@@ -1006,10 +1033,6 @@ function saveData() {
 
 }
 
-
-/* =========================
-   เลือกประเภท
-========================= */
 
 function setType(newType) {
 
@@ -1043,10 +1066,6 @@ function setType(newType) {
 
 }
 
-
-/* =========================
-   เงินประจำสัปดาห์
-========================= */
 
 function saveWeeklyMoney() {
 
@@ -1083,10 +1102,6 @@ function saveWeeklyMoney() {
 
 }
 
-
-/* =========================
-   เพิ่มรายการ
-========================= */
 
 function addTransaction() {
 
@@ -1160,10 +1175,6 @@ function addTransaction() {
 }
 
 
-/* =========================
-   ลบรายการ
-========================= */
-
 function deleteTransaction(id) {
 
   if (
@@ -1191,16 +1202,10 @@ function deleteTransaction(id) {
 }
 
 
-/* =========================
-   คำนวณ
-========================= */
-
 function calculateWeek(week) {
 
   let income =
-    Number(
-      week.weeklyMoney
-    ) || 0;
+    Number(week.weeklyMoney) || 0;
 
   let expense = 0;
 
@@ -1240,10 +1245,6 @@ function calculateWeek(week) {
 
 }
 
-
-/* =========================
-   แสดงข้อมูล
-========================= */
 
 function render() {
 
@@ -1332,10 +1333,6 @@ function render() {
 }
 
 
-/* =========================
-   แสดงรายการ
-========================= */
-
 function renderTransactions() {
 
   const container =
@@ -1352,11 +1349,8 @@ function renderTransactions() {
   ) {
 
     container.innerHTML =
-
       `<div class="empty">
-
         ยังไม่มีรายการ ✨
-
       </div>`;
 
     return;
@@ -1383,31 +1377,17 @@ function renderTransactions() {
           <div class="item-info">
 
             <div class="icon">
-
-              ${
-                isIncome
-                ? "💰"
-                : "🛍️"
-              }
-
+              ${isIncome ? "💰" : "🛍️"}
             </div>
 
             <div>
 
               <div class="item-name">
-
-                ${escapeHTML(
-                  item.name
-                )}
-
+                ${escapeHTML(item.name)}
               </div>
 
               <div class="item-date">
-
-                ${formatDate(
-                  item.date
-                )}
-
+                ${formatDate(item.date)}
               </div>
 
             </div>
@@ -1423,11 +1403,7 @@ function renderTransactions() {
               : "expense-text"
             }">
 
-              ${
-                isIncome
-                ? "+"
-                : "-"
-              }
+              ${isIncome ? "+" : "-"}
 
               ฿${Number(
                 item.amount
@@ -1453,10 +1429,6 @@ function renderTransactions() {
 
 }
 
-
-/* =========================
-   ประวัติสัปดาห์
-========================= */
 
 function renderWeekHistory() {
 
@@ -1506,11 +1478,7 @@ function renderWeekHistory() {
 
             ${getWeekText(key)}
 
-            ${
-              isCurrent
-              ? " ⭐"
-              : ""
-            }
+            ${isCurrent ? " ⭐" : ""}
 
           </h4>
 
@@ -1548,9 +1516,7 @@ function renderWeekHistory() {
             </span>
 
             <span class="week-balance">
-
               ฿${result.balance.toLocaleString()}
-
             </span>
 
           </div>
@@ -1564,10 +1530,6 @@ function renderWeekHistory() {
 }
 
 
-/* =========================
-   ดูสัปดาห์เก่า
-========================= */
-
 function viewWeek(key) {
 
   currentWeekKey = key;
@@ -1575,19 +1537,12 @@ function viewWeek(key) {
   render();
 
   window.scrollTo({
-
     top: 0,
-
     behavior: "smooth"
-
   });
 
 }
 
-
-/* =========================
-   กลับสัปดาห์ปัจจุบัน
-========================= */
 
 function goToCurrentWeek() {
 
@@ -1616,23 +1571,14 @@ function goToCurrentWeek() {
   render();
 
   window.scrollTo({
-
     top: 0,
-
     behavior: "smooth"
-
   });
 
 }
 
 
-/* =========================
-   วันที่
-========================= */
-
-function formatDate(
-  dateString
-) {
+function formatDate(dateString) {
 
   const date =
     new Date(dateString);
@@ -1640,22 +1586,14 @@ function formatDate(
   return date.toLocaleDateString(
     "th-TH",
     {
-
       day: "numeric",
-
       month: "short",
-
       year: "numeric"
-
     }
   );
 
 }
 
-
-/* =========================
-   ป้องกัน HTML
-========================= */
 
 function escapeHTML(text) {
 
@@ -1683,10 +1621,6 @@ function escapeHTML(text) {
 }
 
 
-/* =========================
-   เช็กสัปดาห์ใหม่
-========================= */
-
 function checkNewWeek() {
 
   const realWeek =
@@ -1713,10 +1647,6 @@ function checkNewWeek() {
 
 }
 
-
-/* =========================
-   สำรองข้อมูล
-========================= */
 
 function exportData() {
 
@@ -1772,19 +1702,13 @@ function exportData() {
 }
 
 
-/* =========================
-   นำเข้าข้อมูล
-========================= */
-
 function importData(event) {
 
   const file =
     event.target.files[0];
 
   if (!file) {
-
     return;
-
   }
 
   const reader =
@@ -1801,13 +1725,10 @@ function importData(event) {
           );
 
         if (
-          typeof imported !==
-          "object" ||
+          typeof imported !== "object" ||
           imported === null
         ) {
-
           throw new Error();
-
         }
 
         for (
@@ -1815,11 +1736,9 @@ function importData(event) {
         ) {
 
           if (
-            !imported[key]
-              .transactions ||
+            !imported[key].transactions ||
             !Array.isArray(
-              imported[key]
-                .transactions
+              imported[key].transactions
             )
           ) {
 
@@ -1834,9 +1753,7 @@ function importData(event) {
             "นำเข้าข้อมูลนี้ใช่ไหม?\nข้อมูลเดิมในเว็บจะถูกแทนที่"
           );
 
-        if (
-          !confirmImport
-        ) {
+        if (!confirmImport) {
 
           event.target.value = "";
 
@@ -1844,8 +1761,7 @@ function importData(event) {
 
         }
 
-        allData =
-          imported;
+        allData = imported;
 
         const realWeek =
           getWeekKey();
@@ -1893,16 +1809,14 @@ function importData(event) {
 
 
 /* =========================
-   เริ่มต้นเว็บ
+   เริ่มต้น
 ========================= */
 
-document.getElementById(
-  "date"
-).value =
+document.getElementById("date")
+  .value =
   new Date()
     .toISOString()
     .split("T")[0];
-
 
 checkNewWeek();
 
@@ -1912,3 +1826,4 @@ render();
 
 </body>
 </html>
+```
